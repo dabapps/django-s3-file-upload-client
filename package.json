@@ -1,14 +1,14 @@
 {
   "name": "@dabapps/django-s3-file-upload",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Upload files from the browser to S3 - client side implementation",
-  "main": "dist/js/index.js",
+  "main": "dist/index.js",
   "directories": {},
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
-    "dist": "rm -rf dist/ && mkdir -p dist/js/ && tsc --project './tsconfig.dist.json'",
+    "dist": "rm -rf dist/ && mkdir -p dist/ && tsc --project './tsconfig.dist.json'",
     "lint": "tsc --noEmit --project tsconfig.json && npm run prettier-check && tslint --project tsconfig.json '{src,tests,types,examples,docs}/**/*.@(ts|tsx)'",
     "prettier-check": "prettier --check '{src,tests,@types,examples,docs}/**/*.ts?(x)'",
     "prettier": "prettier --write '{src,tests,@types,examples,docs}/**/*.ts?(x)'",
@@ -29,7 +29,7 @@
     "dabapps"
   ],
   "author": "DabApps",
-  "license": "UNLICENSED",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/dabapps/django-s3-file-upload-client/issues"
   },
@@ -39,13 +39,13 @@
     "js-cookie": "^2.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.3",
+    "@types/jest": "^24.0.9",
     "@types/js-cookie": "^2.2.2",
-    "jest": "^24.7.1",
+    "jest": "^24.3.1",
     "prettier": "^1.17.0",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.15.0",
-    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.3",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.11.0",
+    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.5",
     "typescript": "^3.4.3"
   },
   "peerDependencies": {},
@@ -69,7 +69,10 @@
       "jsx"
     ],
     "testPathIgnorePatterns": [
-      "<rootDir>/../tests/helpers/*"
+      "<rootDir>/tests/helpers/*"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/tests/helpers/*"
     ]
   }
 }
