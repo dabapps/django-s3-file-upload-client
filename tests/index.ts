@@ -1,5 +1,5 @@
 import mockAxios from './helpers/mock-axios';
-jest.mock('axios', () => mockAxios);
+jest.mock('axios', () => ({ default: mockAxios }));
 
 import * as requests from '../src/index';
 import { mockedFile, mockedUploadData } from './helpers/stubs';
