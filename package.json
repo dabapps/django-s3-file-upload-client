@@ -1,0 +1,70 @@
+{
+  "name": "@dabapps/django-s3-file-upload",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/js/index.js",
+  "directories": {},
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "dist": "./scripts/dist",
+    "lint": "tsc --noEmit --project tsconfig.json && npm run prettier-check && tslint --project tsconfig.json '{src,tests,types,examples,docs}/**/*.@(ts|tsx)'",
+    "prettier-check": "diffs=$(prettier --list-different '{src,tests,types,examples,docs}/**/*.ts?(x)'); if [ ! -z $diffs ]; then echo \"Run 'npm run prettier'\nThe following files need formatting:\n$diffs\" && exit 1; fi;",
+    "tests": "jest",
+    "test": "npm run lint && npm run tests -- --runInBand --coverage",
+    "prettier": "prettier --write '{src,tests,types,examples,docs}/**/*.ts?(x)'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabapps/django-s3-file-upload-client.git"
+  },
+  "keywords": [
+    "npm",
+    "template",
+    "dabapps"
+  ],
+  "author": "DabApps",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/dabapps/django-s3-file-upload-client/issues"
+  },
+  "homepage": "https://github.com/dabapps/django-s3-file-upload-client#readme",
+  "dependencies": {
+    "typescript": "^2.9.2",
+    "axios": "^0.18.0",
+    "js-cookie": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.1",
+    "jest": "^23.5.0",
+    "prettier": "^1.14.2",
+    "ts-jest": "^23.1.4",
+    "tslint": "^5.11.0",
+    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.1"
+  },
+  "peerDependencies": {},
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/tests/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/helpers/*"
+    ]
+  }
+}
