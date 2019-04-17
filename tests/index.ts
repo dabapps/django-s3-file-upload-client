@@ -1,8 +1,12 @@
 import mockAxios from './helpers/mock-axios';
 jest.mock('axios', () => mockAxios);
 
-import * as FileUploads from '../src';
-import { mockedFile, mockedUploadData, mockedUploadResponse } from './helpers/stubs';
+import * as FileUploads from '../src/index';
+import {
+  mockedFile,
+  mockedUploadData,
+  mockedUploadResponse,
+} from './helpers/stubs';
 
 describe('uploadFileToS3', () => {
   beforeEach(() => {
@@ -41,7 +45,10 @@ describe('uploadFileToS3', () => {
       // Get the .then calls
       const { thenCalls } = requestCalls[0];
 
-      const spyOnCompleteFileUpload = jest.spyOn(FileUploads, 'completeFileUpload');
+      const spyOnCompleteFileUpload = jest.spyOn(
+        FileUploads,
+        'completeFileUpload'
+      );
 
       // Manually trigger .then
       thenCalls[0].arguments[0]();
@@ -63,12 +70,18 @@ describe('uploadFileToS3', () => {
       // Get the .then calls
       const { thenCalls } = requestCalls[0];
 
-      const spyOnUploadFiletoSignedUrl = jest.spyOn(FileUploads, 'uploadFiletoSignedUrl');
+      const spyOnUploadFiletoSignedUrl = jest.spyOn(
+        FileUploads,
+        'uploadFiletoSignedUrl'
+      );
 
       // Manually trigger .then
       thenCalls[0].arguments[0](mockedUploadResponse);
       expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledTimes(1);
-      expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledWith(mockedUploadResponse, mockedFile);
+      expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledWith(
+        mockedUploadResponse,
+        mockedFile
+      );
     });
   });
 });
