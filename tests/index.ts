@@ -72,7 +72,7 @@ describe('uploadFileToS3', () => {
       );
 
       // Manually trigger .then
-      thenCalls[0].arguments[0](mockedUploadData);
+      thenCalls[0].arguments[0]({ data: mockedUploadData });
       expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledTimes(1);
       expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledWith(
         mockedUploadData,
