@@ -28,9 +28,9 @@ describe('uploadFileToS3', () => {
     });
   });
 
-  describe('uploadFiletoSignedUrl', () => {
+  describe('uploadFileToSignedUrl', () => {
     it('should make an axios request and then call completeFileUpload', () => {
-      requests.uploadFiletoSignedUrl(mockedUploadData, mockedFile);
+      requests.uploadFileToSignedUrl(mockedUploadData, mockedFile);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -54,7 +54,7 @@ describe('uploadFileToS3', () => {
   });
 
   describe('getUploadForm', () => {
-    it('should make an axios request and then call uploadFiletoSignedUrl', () => {
+    it('should make an axios request and then call uploadFileToSignedUrl', () => {
       requests.getUploadForm(mockedFile);
 
       // Get the request calls
@@ -66,15 +66,15 @@ describe('uploadFileToS3', () => {
       // Get the .then calls
       const { thenCalls } = requestCalls[0];
 
-      const spyOnUploadFiletoSignedUrl = jest.spyOn(
+      const spyOnUploadFileToSignedUrl = jest.spyOn(
         requests,
-        'uploadFiletoSignedUrl'
+        'uploadFileToSignedUrl'
       );
 
       // Manually trigger .then
       thenCalls[0].arguments[0]({ data: mockedUploadData });
-      expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledTimes(1);
-      expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledWith(
+      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledTimes(1);
+      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledWith(
         mockedUploadData,
         mockedFile
       );

@@ -32,7 +32,7 @@ export const completeFileUpload = (data: UploadData): Promise<UploadData> => {
     });
 };
 
-export const uploadFiletoSignedUrl = (
+export const uploadFileToSignedUrl = (
   uploadData: UploadData,
   file: File
 ): Promise<UploadData> => {
@@ -68,7 +68,7 @@ export const getUploadForm = (file: File): Promise<UploadData> => {
       },
     })
     .then((uploadResponse: AxiosResponse<UploadData>) => {
-      return uploadFiletoSignedUrl(uploadResponse.data, file);
+      return uploadFileToSignedUrl(uploadResponse.data, file);
     })
     .catch(error => {
       return Promise.reject(error);
