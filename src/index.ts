@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import * as Cookies from 'js-cookie';
-import { File, UploadData, UploadResponse } from './types';
+import { File, UploadData, UploadResponse } from '../types/index';
 
 const POST = 'POST';
 
@@ -27,7 +27,7 @@ export const completeFileUpload = (
     .then(() => {
       return data;
     })
-    .catch(error => {
+    .catch((error: AxiosResponse) => {
       return Promise.reject(error);
     });
 };
@@ -41,18 +41,19 @@ export const uploadFiletoSignedUrl = (
     ...uploadForm.fields,
     file,
   };
-  return axios.request({
-    method: POST,
-    url: uploadForm.url,
-    data: configureFormData(data),
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
+  return axios
+    .request({
+      method: POST,
+      url: uploadForm.url,
+      data: configureFormData(data),
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
     .then(() => {
       return completeFileUpload(uploadResponse.data);
     })
-    .catch(error => {
+    .catch((error: AxiosResponse) => {
       return Promise.reject(error);
     });
 };
@@ -60,17 +61,18 @@ export const uploadFiletoSignedUrl = (
 export const getUploadForm = (
   file: File
 ): Promise<UploadData | AxiosResponse<any>> => {
-  return axios.request({
-    method: POST,
-    url: '/api/s3-file-uploads/',
-    headers: {
-      'X-CSRFToken': Cookies.get('csrftoken'),
-    },
-  })
-    .then(uploadResponse => {
+  return axios
+    .request({
+      method: POST,
+      url: '/api/s3-file-uploads/',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+    })
+    .then((uploadResponse: AxiosResponse) => {
       return uploadFiletoSignedUrl(uploadResponse, file);
     })
-    .catch(error => {
+    .catch((error: AxiosResponse) => {
       return Promise.reject(error);
     });
 };
