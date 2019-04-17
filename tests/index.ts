@@ -1,12 +1,8 @@
 import mockAxios from './helpers/mock-axios';
 jest.mock('axios', () => mockAxios);
 
-import * as FileUploads from '../src/index';
-import {
-  mockedFile,
-  mockedUploadData,
-  mockedUploadResponse,
-} from './helpers/stubs';
+import * as requests from '../src/index';
+import { mockedFile, mockedUploadData } from './helpers/stubs';
 
 describe('uploadFileToS3', () => {
   beforeEach(() => {
@@ -15,7 +11,7 @@ describe('uploadFileToS3', () => {
 
   describe('completeFileUpload', () => {
     it('should make an axios request and return mockedUploadData', () => {
-      FileUploads.completeFileUpload(mockedUploadData);
+      requests.completeFileUpload(mockedUploadData);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -34,7 +30,7 @@ describe('uploadFileToS3', () => {
 
   describe('uploadFiletoSignedUrl', () => {
     it('should make an axios request and then call completeFileUpload', () => {
-      FileUploads.uploadFiletoSignedUrl(mockedUploadResponse, mockedFile);
+      requests.uploadFiletoSignedUrl(mockedUploadData, mockedFile);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -46,7 +42,7 @@ describe('uploadFileToS3', () => {
       const { thenCalls } = requestCalls[0];
 
       const spyOnCompleteFileUpload = jest.spyOn(
-        FileUploads,
+        requests,
         'completeFileUpload'
       );
 
@@ -59,7 +55,7 @@ describe('uploadFileToS3', () => {
 
   describe('getUploadForm', () => {
     it('should make an axios request and then call uploadFiletoSignedUrl', () => {
-      FileUploads.getUploadForm(mockedFile);
+      requests.getUploadForm(mockedFile);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -71,15 +67,15 @@ describe('uploadFileToS3', () => {
       const { thenCalls } = requestCalls[0];
 
       const spyOnUploadFiletoSignedUrl = jest.spyOn(
-        FileUploads,
+        requests,
         'uploadFiletoSignedUrl'
       );
 
       // Manually trigger .then
-      thenCalls[0].arguments[0](mockedUploadResponse);
+      thenCalls[0].arguments[0](mockedUploadData);
       expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledTimes(1);
       expect(spyOnUploadFiletoSignedUrl).toHaveBeenCalledWith(
-        mockedUploadResponse,
+        mockedUploadData,
         mockedFile
       );
     });

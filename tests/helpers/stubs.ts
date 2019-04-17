@@ -1,10 +1,4 @@
-import {
-  File,
-  UploadData,
-  UploadForm,
-  UploadFormFields,
-  UploadResponse,
-} from '../../src/types';
+import { UploadData, UploadForm, UploadFormFields } from '../../src/types';
 
 export const mockedUploadFormFields: UploadFormFields = {
   AWSAccessKeyId: 'aaaaaa',
@@ -30,16 +24,4 @@ export const mockedUploadData: UploadData = {
   upload_form: mockedUploadForm,
 };
 
-export const mockedUploadResponse: UploadResponse = {
-  data: mockedUploadData,
-};
-
-export const mockedFile: File = {
-  lastModified: 34567,
-  lastModifiedDate: new Date('2020-01-10'),
-  name: 'llama_file',
-  path: '/something/something/llama',
-  size: 12345,
-  type: 'png',
-  webkitRelativePath: 'another/path',
-};
+export const mockedFile = new File([], 'llama');

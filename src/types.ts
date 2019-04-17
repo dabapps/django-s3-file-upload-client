@@ -22,16 +22,6 @@ export interface UploadData {
   upload_form: UploadForm;
 }
 
-export interface UploadResponse {
-  data: UploadData;
-}
-
-export interface File {
-  lastModified: number;
-  lastModifiedDate: Date;
-  name: string;
-  path: string;
-  size: number;
-  type: string;
-  webkitRelativePath: string;
+export interface UploadFormFieldsAndFile extends UploadFormFields {
+  file: File;
 }

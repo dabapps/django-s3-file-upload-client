@@ -1,21 +1,21 @@
 import axios, { AxiosResponse } from 'axios';
 import * as Cookies from 'js-cookie';
-import { File, UploadData, UploadResponse } from './types';
+import { UploadData, UploadFormFieldsAndFile } from './types';
 
 const POST = 'POST';
 
-export const configureFormData = (data: any) => {
+export const configureFormData = (data: UploadFormFieldsAndFile) => {
   const formData = new FormData();
-  Object.keys(data).forEach((key: string) => {
-    formData.append(key, data[key]);
-  });
+  (Object.keys(data) as ReadonlyArray<keyof UploadFormFieldsAndFile>).forEach(
+    key => {
+      formData.append(key, data[key]);
+    }
+  );
 
   return formData;
 };
 
-export const completeFileUpload = (
-  data: UploadData
-): Promise<UploadData | AxiosResponse<any>> => {
+export const completeFileUpload = (data: UploadData): Promise<UploadData> => {
   return axios
     .request({
       method: POST,
@@ -27,16 +27,16 @@ export const completeFileUpload = (
     .then(() => {
       return data;
     })
-    .catch((error: AxiosResponse) => {
+    .catch(error => {
       return Promise.reject(error);
     });
 };
 
 export const uploadFiletoSignedUrl = (
-  uploadResponse: UploadResponse,
+  uploadData: UploadData,
   file: File
-): Promise<UploadData | AxiosResponse<any>> => {
-  const uploadForm = uploadResponse.data.upload_form;
+): Promise<UploadData> => {
+  const uploadForm = uploadData.upload_form;
   const data = {
     ...uploadForm.fields,
     file,
@@ -51,16 +51,14 @@ export const uploadFiletoSignedUrl = (
       },
     })
     .then(() => {
-      return completeFileUpload(uploadResponse.data);
+      return completeFileUpload(uploadData);
     })
-    .catch((error: AxiosResponse) => {
+    .catch(error => {
       return Promise.reject(error);
     });
 };
 
-export const getUploadForm = (
-  file: File
-): Promise<UploadData | AxiosResponse<any>> => {
+export const getUploadForm = (file: File): Promise<UploadData> => {
   return axios
     .request({
       method: POST,
@@ -69,16 +67,14 @@ export const getUploadForm = (
         'X-CSRFToken': Cookies.get('csrftoken'),
       },
     })
-    .then((uploadResponse: AxiosResponse) => {
-      return uploadFiletoSignedUrl(uploadResponse, file);
+    .then((uploadResponse: AxiosResponse<UploadData>) => {
+      return uploadFiletoSignedUrl(uploadResponse.data, file);
     })
-    .catch((error: AxiosResponse) => {
+    .catch(error => {
       return Promise.reject(error);
     });
 };
 
-export const uploadFileToS3 = (
-  file: File
-): Promise<UploadData | AxiosResponse<any>> => {
+export const uploadFileToS3 = (file: File): Promise<UploadData> => {
   return getUploadForm(file);
 };
