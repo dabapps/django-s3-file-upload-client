@@ -9,6 +9,17 @@ describe('uploadFileToS3', () => {
     mockAxios.clear();
   });
 
+  describe('uploadFileToS3', () => {
+    it('should call getUploadForm with the provided file', () => {
+      jest.spyOn(requests, 'getUploadForm');
+
+      requests.uploadFileToS3(mockedFile);
+
+      expect(requests.getUploadForm).toHaveBeenCalledTimes(1);
+      expect(requests.getUploadForm).toHaveBeenCalledWith(mockedFile);
+    });
+  });
+
   describe('completeFileUpload', () => {
     it('should make an axios request and return mockedUploadData', () => {
       requests.completeFileUpload(mockedUploadData);
