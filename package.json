@@ -1,7 +1,7 @@
 {
   "name": "@dabapps/django-s3-file-upload",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Upload files from the browser to S3 - client side implementation",
   "main": "dist/js/index.js",
   "directories": {},
   "publishConfig": {
@@ -21,7 +21,11 @@
   },
   "keywords": [
     "npm",
-    "template",
+    "file",
+    "upload",
+    "s3",
+    "aws",
+    "django",
     "dabapps"
   ],
   "author": "DabApps",
@@ -33,16 +37,16 @@
   "dependencies": {
     "axios": "^0.18.0",
     "js-cookie": "^2.2.0",
-    "typescript": "^2.9.2"
+    "typescript": "^3.4.3"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.1",
+    "@types/jest": "^23.3.3",
     "@types/js-cookie": "^2.2.2",
-    "jest": "^23.5.0",
-    "prettier": "^1.14.2",
-    "ts-jest": "^23.1.4",
-    "tslint": "^5.11.0",
-    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.1"
+    "jest": "^24.7.1",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.15.0",
+    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.3"
   },
   "peerDependencies": {},
   "jest": {
