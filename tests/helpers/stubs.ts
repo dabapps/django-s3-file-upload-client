@@ -4,7 +4,7 @@ import {
   UploadForm,
   UploadFormFields,
   UploadResponse,
-} from '../../types/index';
+} from '../../src/types';
 
 export const mockedUploadFormFields: UploadFormFields = {
   AWSAccessKeyId: 'aaaaaa',
