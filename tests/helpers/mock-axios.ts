@@ -154,4 +154,4 @@ export function createMockCancelledError(value: string | Error) {
   return new MockCancelledError(value instanceof Error ? value.message : value);
 }
 
-export default mockAxios;
+export { mockAxios };

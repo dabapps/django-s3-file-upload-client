@@ -1,4 +1,4 @@
-import mockAxios from './helpers/mock-axios';
+import { mockAxios } from './helpers/mock-axios';
 jest.mock('axios', () => ({ default: mockAxios }));
 
 import * as requests from '../src/index';
