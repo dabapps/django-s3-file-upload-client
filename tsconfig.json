@@ -5,14 +5,8 @@
     "strict": true,
     "pretty": true,
     "jsx": "react",
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
-    "lib": [
-      "es5",
-      "dom",
-      "es2015.promise",
-      "es2017"
-    ],
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "typeRoots" : [

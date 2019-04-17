@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-rm -rf dist/
-
-mkdir -p dist/js/
-
-tsc --project './tsconfig.dist.json'

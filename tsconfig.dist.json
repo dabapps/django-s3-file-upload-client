@@ -5,7 +5,7 @@
     "sourceMap": true,
     "listEmittedFiles": true,
     "rootDir": "./src/",
-    "outDir": "./dist/js/"
+    "outDir": "./dist/"
   },
   "include": [
     "./src/"
