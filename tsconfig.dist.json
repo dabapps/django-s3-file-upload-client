@@ -4,10 +4,10 @@
     "declaration": true,
     "sourceMap": true,
     "listFiles": true,
-    "rootDir": "./src/ts/",
+    "rootDir": "./src/",
     "outDir": "./dist/js/"
   },
   "include": [
-    "./src/ts/"
+    "./src/"
   ]
 }
