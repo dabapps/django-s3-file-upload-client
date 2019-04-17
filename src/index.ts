@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import * as Cookies from 'js-cookie';
-import { File, UploadData, UploadResponse } from '../types/index';
+import { File, UploadData, UploadResponse } from './types';
 
 const POST = 'POST';
 

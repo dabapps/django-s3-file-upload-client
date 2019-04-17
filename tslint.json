@@ -1,8 +1,5 @@
 {
   "extends": [
     "tslint-config-dabapps"
-  ],
-  "rules": {
-    "no-unused-variable": false
-  }
+  ]
 }

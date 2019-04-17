@@ -16,13 +16,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "typeRoots" : [
-      "./types/",
+      "./@types/",
       "./node_modules/@types/"
     ]
   },
-  "exclude": [
-    "./dist/",
+  "include": [
+    "./@types/",
+    "./src/",
     "./examples/",
-    "./node_modules/"
+    "./tests/"
   ]
 }

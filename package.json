@@ -8,12 +8,12 @@
     "access": "restricted"
   },
   "scripts": {
-    "dist": "./scripts/dist",
+    "dist": "rm -rf dist/ && mkdir -p dist/js/ && tsc --project './tsconfig.dist.json'",
     "lint": "tsc --noEmit --project tsconfig.json && npm run prettier-check && tslint --project tsconfig.json '{src,tests,types,examples,docs}/**/*.@(ts|tsx)'",
-    "prettier-check": "diffs=$(prettier --list-different '{src,tests,types,examples,docs}/**/*.ts?(x)'); if [ ! -z $diffs ]; then echo \"Run 'npm run prettier'\nThe following files need formatting:\n$diffs\" && exit 1; fi;",
+    "prettier-check": "prettier --check '{src,tests,@types,examples,docs}/**/*.ts?(x)'",
+    "prettier": "prettier --write '{src,tests,@types,examples,docs}/**/*.ts?(x)'",
     "tests": "jest",
-    "test": "npm run lint && npm run tests -- --runInBand --coverage",
-    "prettier": "prettier --write '{src,tests,types,examples,docs}/**/*.ts?(x)'"
+    "test": "npm run lint && npm run tests -- --runInBand --coverage"
   },
   "repository": {
     "type": "git",
@@ -36,8 +36,7 @@
   "homepage": "https://github.com/dabapps/django-s3-file-upload-client#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "js-cookie": "^2.2.0",
-    "typescript": "^3.4.3"
+    "js-cookie": "^2.2.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.3",
@@ -46,7 +45,8 @@
     "prettier": "^1.17.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.15.0",
-    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.3"
+    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.3",
+    "typescript": "^3.4.3"
   },
   "peerDependencies": {},
   "jest": {
