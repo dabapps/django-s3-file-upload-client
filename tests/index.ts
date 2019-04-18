@@ -47,7 +47,7 @@ describe('uploadFileToS3', () => {
       );
     });
 
-    it('should make an axios request and catch errors', () => {
+    it('should make an axios request and rethrow caught errors', () => {
       requests.getUploadForm(mockedFile);
 
       // Get the request calls
@@ -87,7 +87,7 @@ describe('uploadFileToS3', () => {
       expect(spyOnCompleteFileUpload).toHaveBeenCalledWith(mockedUploadData);
     });
 
-    it('should make an axios request and catch errors', () => {
+    it('should make an axios request and rethrow caught errors', () => {
       requests.uploadFileToSignedUrl(mockedUploadData, mockedFile);
 
       // Get the request calls
@@ -121,7 +121,7 @@ describe('uploadFileToS3', () => {
       expect(response).toEqual(mockedUploadData);
     });
 
-    it('should make an axios request and catch errors', () => {
+    it('should make an axios request and rethrow caught errors', () => {
       requests.completeFileUpload(mockedUploadData);
 
       // Get the request calls
