@@ -60,7 +60,7 @@ describe('uploadFileToS3', () => {
       const { catchCalls } = requestCalls[0];
 
       // Manually trigger .catch
-      catchCalls[0].arguments[0]('error')
+      catchCalls[0].arguments[0]('error');
     });
   });
 
@@ -101,7 +101,7 @@ describe('uploadFileToS3', () => {
       const { catchCalls } = requestCalls[0];
 
       // Manually trigger .catch
-      catchCalls[0].arguments[0]('error')
+      catchCalls[0].arguments[0]('error');
     });
   });
 
@@ -136,7 +136,7 @@ describe('uploadFileToS3', () => {
       const { catchCalls } = requestCalls[0];
 
       // Manually trigger .catch
-      catchCalls[0].arguments[0]('error')
+      catchCalls[0].arguments[0]('error');
     });
   });
 });
