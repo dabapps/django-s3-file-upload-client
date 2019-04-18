@@ -59,8 +59,7 @@ describe('uploadFileToS3', () => {
       // Get the .catch calls
       const { catchCalls } = requestCalls[0];
 
-      // Manually trigger .catch
-      catchCalls[0].arguments[0]('error');
+      expect(() => catchCalls[0].arguments[0]('an error')).toThrow('an error');
     });
   });
 
@@ -100,8 +99,7 @@ describe('uploadFileToS3', () => {
       // Get the .catch calls
       const { catchCalls } = requestCalls[0];
 
-      // Manually trigger .catch
-      catchCalls[0].arguments[0]('error');
+      expect(() => catchCalls[0].arguments[0]('an error')).toThrow('an error');
     });
   });
 
@@ -135,8 +133,7 @@ describe('uploadFileToS3', () => {
       // Get the .catch calls
       const { catchCalls } = requestCalls[0];
 
-      // Manually trigger .catch
-      catchCalls[0].arguments[0]('error');
+      expect(() => catchCalls[0].arguments[0]('an error')).toThrow('an error');
     });
   });
 });
