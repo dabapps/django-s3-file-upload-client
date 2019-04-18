@@ -20,9 +20,9 @@ describe('uploadFileToS3', () => {
     });
   });
 
-  describe('completeFileUpload', () => {
-    it('should make an axios request and return mockedUploadData', () => {
-      requests.completeFileUpload(mockedUploadData);
+  describe('getUploadForm', () => {
+    it('should make an axios request and then call uploadFileToSignedUrl', () => {
+      requests.getUploadForm(mockedFile);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -33,9 +33,34 @@ describe('uploadFileToS3', () => {
       // Get the .then calls
       const { thenCalls } = requestCalls[0];
 
+      const spyOnUploadFileToSignedUrl = jest.spyOn(
+        requests,
+        'uploadFileToSignedUrl'
+      );
+
       // Manually trigger .then
-      const response = thenCalls[0].arguments[0]();
-      expect(response).toEqual(mockedUploadData);
+      thenCalls[0].arguments[0]({ data: mockedUploadData });
+      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledTimes(1);
+      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledWith(
+        mockedUploadData,
+        mockedFile
+      );
+    });
+
+    it('should make an axios request and catch errors', () => {
+      requests.getUploadForm(mockedFile);
+
+      // Get the request calls
+      const { requestCalls } = mockAxios;
+
+      // Check that it was called
+      expect(requestCalls.length).toBe(1);
+
+      // Get the .catch calls
+      const { catchCalls } = requestCalls[0];
+
+      // Manually trigger .catch
+      catchCalls[0].arguments[0]('error')
     });
   });
 
@@ -62,11 +87,27 @@ describe('uploadFileToS3', () => {
       expect(spyOnCompleteFileUpload).toHaveBeenCalledTimes(1);
       expect(spyOnCompleteFileUpload).toHaveBeenCalledWith(mockedUploadData);
     });
+
+    it('should make an axios request and catch errors', () => {
+      requests.getUploadForm(mockedFile);
+
+      // Get the request calls
+      const { requestCalls } = mockAxios;
+
+      // Check that it was called
+      expect(requestCalls.length).toBe(1);
+
+      // Get the .catch calls
+      const { catchCalls } = requestCalls[0];
+
+      // Manually trigger .catch
+      catchCalls[0].arguments[0]('error')
+    });
   });
 
-  describe('getUploadForm', () => {
-    it('should make an axios request and then call uploadFileToSignedUrl', () => {
-      requests.getUploadForm(mockedFile);
+  describe('completeFileUpload', () => {
+    it('should make an axios request and return mockedUploadData', () => {
+      requests.completeFileUpload(mockedUploadData);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -77,18 +118,25 @@ describe('uploadFileToS3', () => {
       // Get the .then calls
       const { thenCalls } = requestCalls[0];
 
-      const spyOnUploadFileToSignedUrl = jest.spyOn(
-        requests,
-        'uploadFileToSignedUrl'
-      );
-
       // Manually trigger .then
-      thenCalls[0].arguments[0]({ data: mockedUploadData });
-      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledTimes(1);
-      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledWith(
-        mockedUploadData,
-        mockedFile
-      );
+      const response = thenCalls[0].arguments[0]();
+      expect(response).toEqual(mockedUploadData);
+    });
+
+    it('should make an axios request and catch errors', () => {
+      requests.getUploadForm(mockedFile);
+
+      // Get the request calls
+      const { requestCalls } = mockAxios;
+
+      // Check that it was called
+      expect(requestCalls.length).toBe(1);
+
+      // Get the .catch calls
+      const { catchCalls } = requestCalls[0];
+
+      // Manually trigger .catch
+      catchCalls[0].arguments[0]('error')
     });
   });
 });
