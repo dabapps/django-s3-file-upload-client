@@ -89,7 +89,7 @@ describe('uploadFileToS3', () => {
     });
 
     it('should make an axios request and catch errors', () => {
-      requests.getUploadForm(mockedFile);
+      requests.uploadFileToSignedUrl(mockedUploadData, mockedFile);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -124,7 +124,7 @@ describe('uploadFileToS3', () => {
     });
 
     it('should make an axios request and catch errors', () => {
-      requests.getUploadForm(mockedFile);
+      requests.completeFileUpload(mockedUploadData);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
