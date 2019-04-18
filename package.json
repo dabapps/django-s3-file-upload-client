@@ -48,31 +48,5 @@
     "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.5",
     "typescript": "^3.4.3"
   },
-  "peerDependencies": {},
-  "jest": {
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/tests/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/tests/helpers/*"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/tests/helpers/*"
-    ]
-  }
+  "peerDependencies": {}
 }
