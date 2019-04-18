@@ -4,7 +4,7 @@ jest.mock('axios', () => ({ default: mockAxios }));
 import * as requests from '../src/index';
 import { mockedFile, mockedUploadData } from './helpers/stubs';
 
-describe('uploadFileToS3', () => {
+describe('Django S3 File Upload', () => {
   beforeEach(() => {
     mockAxios.clear();
   });
