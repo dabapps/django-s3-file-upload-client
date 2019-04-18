@@ -1,0 +1,52 @@
+{
+  "name": "@dabapps/django-s3-file-upload",
+  "version": "0.0.0",
+  "description": "Upload files from the browser to S3 - client side implementation",
+  "main": "dist/index.js",
+  "directories": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dist": "rm -rf dist/ && mkdir -p dist/ && tsc --project './tsconfig.dist.json'",
+    "lint": "tsc --noEmit --project tsconfig.json && npm run prettier-check && tslint --project tsconfig.json '{src,tests,types,examples,docs}/**/*.@(ts|tsx)'",
+    "prettier-check": "prettier --check '**/*.{ts,tsx,js,jsx}'",
+    "prettier": "prettier --write '**/*.{ts,tsx,js,jsx}'",
+    "tests": "jest",
+    "test": "npm run lint && npm run tests -- --runInBand --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabapps/django-s3-file-upload-client.git"
+  },
+  "keywords": [
+    "npm",
+    "file",
+    "upload",
+    "s3",
+    "aws",
+    "django",
+    "dabapps"
+  ],
+  "author": "DabApps",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/dabapps/django-s3-file-upload-client/issues"
+  },
+  "homepage": "https://github.com/dabapps/django-s3-file-upload-client#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "js-cookie": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.9",
+    "@types/js-cookie": "^2.2.2",
+    "jest": "^24.3.1",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.11.0",
+    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.5",
+    "typescript": "^3.4.3"
+  },
+  "peerDependencies": {}
+}
