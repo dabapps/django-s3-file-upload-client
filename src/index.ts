@@ -28,7 +28,7 @@ export const completeFileUpload = (data: UploadData): Promise<UploadData> => {
       return data;
     })
     .catch(error => {
-      return Promise.reject(error);
+      throw error;
     });
 };
 
@@ -54,7 +54,7 @@ export const uploadFileToSignedUrl = (
       return completeFileUpload(uploadData);
     })
     .catch(error => {
-      return Promise.reject(error);
+      throw error;
     });
 };
 
@@ -71,7 +71,7 @@ export const getUploadForm = (file: File): Promise<UploadData> => {
       return uploadFileToSignedUrl(uploadResponse.data, file);
     })
     .catch(error => {
-      return Promise.reject(error);
+      throw error;
     });
 };
 
