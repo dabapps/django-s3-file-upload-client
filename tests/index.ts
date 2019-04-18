@@ -46,21 +46,6 @@ describe('Django S3 File Upload', () => {
         mockedFile
       );
     });
-
-    it('should make an axios request and rethrow caught errors', () => {
-      requests.getUploadForm(mockedFile);
-
-      // Get the request calls
-      const { requestCalls } = mockAxios;
-
-      // Check that it was called
-      expect(requestCalls.length).toBe(1);
-
-      // Get the .catch calls
-      const { catchCalls } = requestCalls[0];
-
-      expect(() => catchCalls[0].arguments[0]('an error')).toThrow('an error');
-    });
   });
 
   describe('uploadFileToSignedUrl', () => {
@@ -86,21 +71,6 @@ describe('Django S3 File Upload', () => {
       expect(spyOnCompleteFileUpload).toHaveBeenCalledTimes(1);
       expect(spyOnCompleteFileUpload).toHaveBeenCalledWith(mockedUploadData);
     });
-
-    it('should make an axios request and rethrow caught errors', () => {
-      requests.uploadFileToSignedUrl(mockedUploadData, mockedFile);
-
-      // Get the request calls
-      const { requestCalls } = mockAxios;
-
-      // Check that it was called
-      expect(requestCalls.length).toBe(1);
-
-      // Get the .catch calls
-      const { catchCalls } = requestCalls[0];
-
-      expect(() => catchCalls[0].arguments[0]('an error')).toThrow('an error');
-    });
   });
 
   describe('completeFileUpload', () => {
@@ -119,21 +89,6 @@ describe('Django S3 File Upload', () => {
       // Manually trigger .then
       const response = thenCalls[0].arguments[0]();
       expect(response).toEqual(mockedUploadData);
-    });
-
-    it('should make an axios request and rethrow caught errors', () => {
-      requests.completeFileUpload(mockedUploadData);
-
-      // Get the request calls
-      const { requestCalls } = mockAxios;
-
-      // Check that it was called
-      expect(requestCalls.length).toBe(1);
-
-      // Get the .catch calls
-      const { catchCalls } = requestCalls[0];
-
-      expect(() => catchCalls[0].arguments[0]('an error')).toThrow('an error');
     });
   });
 });

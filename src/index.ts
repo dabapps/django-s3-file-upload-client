@@ -27,9 +27,6 @@ export const completeFileUpload = (data: UploadData): Promise<UploadData> => {
     })
     .then(() => {
       return data;
-    })
-    .catch(error => {
-      throw error;
     });
 };
 
@@ -53,9 +50,6 @@ export const uploadFileToSignedUrl = (
     })
     .then(() => {
       return completeFileUpload(uploadData);
-    })
-    .catch(error => {
-      throw error;
     });
 };
 
@@ -70,9 +64,6 @@ export const getUploadForm = (file: File): Promise<UploadData> => {
     })
     .then((uploadResponse: AxiosResponse<UploadData>) => {
       return uploadFileToSignedUrl(uploadResponse.data, file);
-    })
-    .catch(error => {
-      throw error;
     });
 };
 
