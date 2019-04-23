@@ -16,7 +16,7 @@ describe('createFileUploadReducer', () => {
       const state: UploadState = {
         loading: false,
         fileCount: 2,
-        inFlightCount: 1,
+        inFlightCount: 0,
         completeCount: 1,
         successCount: 0,
         failureCount: 1,
@@ -30,6 +30,26 @@ describe('createFileUploadReducer', () => {
         ...INITIAL_REDUCER_STATE,
         fileCount: 3,
       });
+    });
+
+    it('should log an error if a duplicate upload is started during another upload (for the same action set)', () => {
+      jest.spyOn(console, 'error').mockImplementation();
+
+      const state: UploadState = {
+        loading: true,
+        fileCount: 2,
+        inFlightCount: 1,
+        completeCount: 1,
+        successCount: 0,
+        failureCount: 1,
+        error: ['nope'],
+        data: undefined,
+      };
+
+      begin(state, { type: ACTION_SET.BEGIN, payload: 3 });
+
+      // tslint:disable-next-line:no-console
+      expect(console.error).toHaveBeenCalledTimes(1);
     });
   });
 
