@@ -35,6 +35,10 @@ export interface ActionSet {
   readonly FAILURE: symbol;
 }
 
+export interface FileUploadOptions {
+  shouldRethrow?: (error: unknown) => boolean;
+}
+
 export interface UploadState {
   loading: boolean;
   fileCount: number;

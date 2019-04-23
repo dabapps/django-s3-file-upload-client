@@ -1,6 +1,12 @@
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { ActionSet, BeginAction, FailureAction, SuccessAction } from './types';
+import {
+  ActionSet,
+  BeginAction,
+  FailureAction,
+  FileUploadOptions,
+  SuccessAction,
+} from './types';
 import { uploadFileToS3 } from './upload-file-to-s3';
 
 export const uploadFileWithLoading = <S>(
@@ -21,9 +27,12 @@ export const uploadFileWithLoading = <S>(
     });
 };
 
-export const createFileUploadAction = <S>(actionSet: ActionSet) => (
-  files: ReadonlyArray<File>
-) => (dispatch: ThunkDispatch<S, unknown, AnyAction>) => {
+export const createFileUploadAction = <S>(
+  actionSet: ActionSet,
+  options?: FileUploadOptions
+) => (files: ReadonlyArray<File>) => (
+  dispatch: ThunkDispatch<S, unknown, AnyAction>
+) => {
   const promises = files.map(file =>
     uploadFileWithLoading(actionSet, file, dispatch)
   );
@@ -33,5 +42,9 @@ export const createFileUploadAction = <S>(actionSet: ActionSet) => (
     payload: files.length,
   });
 
-  return Promise.all(promises);
+  return Promise.all(promises).catch(error => {
+    if (options && options.shouldRethrow && options.shouldRethrow(error)) {
+      throw error;
+    }
+  });
 };
