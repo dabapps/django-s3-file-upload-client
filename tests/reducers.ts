@@ -63,10 +63,10 @@ describe('createFileUploadReducer', () => {
         fileCount: 2,
         inFlightCount: 1,
         completeCount: 1,
-        successCount: 1,
-        failureCount: 0,
-        error: undefined,
-        data: ['first file' as any],
+        successCount: 0,
+        failureCount: 1,
+        error: ['first file' as any],
+        data: undefined,
       };
 
       const result = success(state, {
@@ -79,8 +79,8 @@ describe('createFileUploadReducer', () => {
         loading: false,
         inFlightCount: 0,
         completeCount: 2,
-        successCount: 2,
-        data: ['first file', 'second file'],
+        successCount: 1,
+        data: ['second file'],
       });
     });
   });
