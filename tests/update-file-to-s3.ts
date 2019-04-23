@@ -62,10 +62,7 @@ describe('Django S3 File Upload', () => {
       // Get the .then calls
       const { thenCalls } = requestCalls[0];
 
-      const spyOnCompleteFileUpload = jest.spyOn(
-        request,
-        'completeFileUpload'
-      );
+      const spyOnCompleteFileUpload = jest.spyOn(request, 'completeFileUpload');
 
       // Manually trigger .then
       thenCalls[0].arguments[0]();
