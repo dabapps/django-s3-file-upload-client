@@ -36,8 +36,12 @@
   },
   "homepage": "https://github.com/dabapps/django-s3-file-upload-client#readme",
   "dependencies": {
+    "@dabapps/redux-create-reducer": "^1.0.3",
+    "@types/redux-thunk": "^2.1.0",
     "axios": "^0.18.0",
-    "js-cookie": "^2.2.0"
+    "js-cookie": "^2.2.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.9",
