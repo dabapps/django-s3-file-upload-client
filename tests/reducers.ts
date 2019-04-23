@@ -1,6 +1,6 @@
 import { createActionSet, createFileUploadReducer, UploadState } from '../src';
 import { INITIAL_REDUCER_STATE } from '../src/constants';
-import { begin, request } from '../src/reducers';
+import { begin, request, success } from '../src/reducers';
 
 describe('createFileUploadReducer', () => {
   const ACTION_SET = createActionSet('PROFILE_PICTURE_UPLOAD');
@@ -52,6 +52,35 @@ describe('createFileUploadReducer', () => {
         ...state,
         loading: true,
         inFlightCount: 1,
+      });
+    });
+  });
+
+  describe('success', () => {
+    it('should decrement the inFlightCount, set loading to false, increment the complete and success counts, and store the result', () => {
+      const state: UploadState = {
+        loading: true,
+        fileCount: 2,
+        inFlightCount: 1,
+        completeCount: 1,
+        successCount: 1,
+        failureCount: 0,
+        error: undefined,
+        data: ['first file' as any],
+      };
+
+      const result = success(state, {
+        type: ACTION_SET.SUCCESS,
+        payload: 'second file',
+      });
+
+      expect(result).toEqual({
+        ...state,
+        loading: false,
+        inFlightCount: 0,
+        completeCount: 2,
+        successCount: 2,
+        data: ['first file', 'second file'],
       });
     });
   });
