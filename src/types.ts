@@ -25,3 +25,10 @@ export interface UploadData {
 export interface UploadFormFieldsAndFile extends UploadFormFields {
   file: File;
 }
+
+export interface ActionSet {
+  readonly BEGIN: symbol;
+  readonly REQUEST: symbol;
+  readonly SUCCESS: symbol;
+  readonly FAILURE: symbol;
+}
