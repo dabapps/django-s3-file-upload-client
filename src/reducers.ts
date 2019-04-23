@@ -47,7 +47,7 @@ export const success = (state: UploadState, action: AnyAction) => {
   };
 };
 
-const failure = (state: UploadState, action: AnyAction) => {
+export const failure = (state: UploadState, action: AnyAction) => {
   const inFlightCount = Math.max(state.inFlightCount - 1, 0);
   const loading = inFlightCount > 0;
   const completeCount = state.completeCount + 1;
