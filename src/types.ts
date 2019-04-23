@@ -1,3 +1,5 @@
+import { Action } from 'redux';
+
 export interface UploadFormFields {
   AWSAccessKeyId: string;
   key: string;
@@ -40,6 +42,18 @@ export interface UploadState {
   completeCount: number;
   successCount: number;
   failureCount: number;
-  data: undefined | UploadData | ReadonlyArray<UploadData>;
-  error: unknown;
+  data: undefined | ReadonlyArray<UploadData>;
+  error: undefined | ReadonlyArray<unknown>;
+}
+
+export interface BeginAction extends Action {
+  payload: number;
+}
+
+export interface SuccessAction extends Action {
+  payload: UploadData;
+}
+
+export interface FailureAction extends Action {
+  payload: unknown;
 }

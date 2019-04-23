@@ -1,9 +1,16 @@
 import { createReducer } from '@dabapps/redux-create-reducer';
+import { AnyAction } from 'redux';
 import { INITIAL_REDUCER_STATE } from './constants';
-import { ActionSet, UploadState } from './types';
+import {
+  ActionSet,
+  BeginAction,
+  FailureAction,
+  SuccessAction,
+  UploadState,
+} from './types';
 
 export const createFileUploadReducer = (actionSet: ActionSet) =>
-  createReducer<UploadState>(
+  createReducer<UploadState, AnyAction>(
     {
       [actionSet.BEGIN]: (state, action) => {
         if (window.console && state.loading) {
@@ -13,7 +20,10 @@ export const createFileUploadReducer = (actionSet: ActionSet) =>
           );
         }
 
-        return { ...INITIAL_REDUCER_STATE, fileCount: action.payload };
+        return {
+          ...INITIAL_REDUCER_STATE,
+          fileCount: (action as BeginAction).payload,
+        };
       },
       [actionSet.REQUEST]: state => {
         const inFlightCount = state.inFlightCount + 1;
@@ -26,10 +36,11 @@ export const createFileUploadReducer = (actionSet: ActionSet) =>
         const loading = inFlightCount > 0;
         const completeCount = state.completeCount + 1;
         const successCount = state.successCount + 1;
+        const { data = [] } = state;
 
         return {
           ...state,
-          data: action.payload,
+          data: [...data, (action as SuccessAction).payload],
           loading,
           inFlightCount,
           completeCount,
@@ -41,10 +52,11 @@ export const createFileUploadReducer = (actionSet: ActionSet) =>
         const loading = inFlightCount > 0;
         const completeCount = state.completeCount + 1;
         const failureCount = state.failureCount + 1;
+        const { error = [] } = state;
 
         return {
           ...state,
-          error: action.payload,
+          error: [...error, (action as FailureAction).payload],
           loading,
           inFlightCount,
           completeCount,
