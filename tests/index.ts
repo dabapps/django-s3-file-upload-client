@@ -1,7 +1,7 @@
 import { mockAxios } from './helpers/mock-axios';
 jest.mock('axios', () => ({ default: mockAxios }));
 
-import * as requests from '../src/index';
+import * as uploadFileToS3 from '../src/upload-file-to-s3';
 import { mockedFile, mockedUploadData } from './helpers/stubs';
 
 describe('Django S3 File Upload', () => {
@@ -11,18 +11,18 @@ describe('Django S3 File Upload', () => {
 
   describe('uploadFileToS3', () => {
     it('should call getUploadForm with the provided file', () => {
-      jest.spyOn(requests, 'getUploadForm');
+      jest.spyOn(uploadFileToS3, 'getUploadForm');
 
-      requests.uploadFileToS3(mockedFile);
+      uploadFileToS3.uploadFileToS3(mockedFile);
 
-      expect(requests.getUploadForm).toHaveBeenCalledTimes(1);
-      expect(requests.getUploadForm).toHaveBeenCalledWith(mockedFile);
+      expect(uploadFileToS3.getUploadForm).toHaveBeenCalledTimes(1);
+      expect(uploadFileToS3.getUploadForm).toHaveBeenCalledWith(mockedFile);
     });
   });
 
   describe('getUploadForm', () => {
     it('should make an axios request and then call uploadFileToSignedUrl', () => {
-      requests.getUploadForm(mockedFile);
+      uploadFileToS3.getUploadForm(mockedFile);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -34,7 +34,7 @@ describe('Django S3 File Upload', () => {
       const { thenCalls } = requestCalls[0];
 
       const spyOnUploadFileToSignedUrl = jest.spyOn(
-        requests,
+        uploadFileToS3,
         'uploadFileToSignedUrl'
       );
 
@@ -50,7 +50,7 @@ describe('Django S3 File Upload', () => {
 
   describe('uploadFileToSignedUrl', () => {
     it('should make an axios request and then call completeFileUpload', () => {
-      requests.uploadFileToSignedUrl(mockedUploadData, mockedFile);
+      uploadFileToS3.uploadFileToSignedUrl(mockedUploadData, mockedFile);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
@@ -62,7 +62,7 @@ describe('Django S3 File Upload', () => {
       const { thenCalls } = requestCalls[0];
 
       const spyOnCompleteFileUpload = jest.spyOn(
-        requests,
+        uploadFileToS3,
         'completeFileUpload'
       );
 
@@ -75,7 +75,7 @@ describe('Django S3 File Upload', () => {
 
   describe('completeFileUpload', () => {
     it('should make an axios request and return mockedUploadData', () => {
-      requests.completeFileUpload(mockedUploadData);
+      uploadFileToS3.completeFileUpload(mockedUploadData);
 
       // Get the request calls
       const { requestCalls } = mockAxios;
