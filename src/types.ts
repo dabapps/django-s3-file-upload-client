@@ -32,3 +32,14 @@ export interface ActionSet {
   readonly SUCCESS: symbol;
   readonly FAILURE: symbol;
 }
+
+export interface UploadState {
+  loading: boolean;
+  fileCount: number;
+  inFlightCount: number;
+  completeCount: number;
+  successCount: number;
+  failureCount: number;
+  data: undefined | UploadData | ReadonlyArray<UploadData>;
+  error: unknown;
+}
