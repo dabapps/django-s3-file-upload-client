@@ -56,5 +56,15 @@ describe('createFileUploadAction', () => {
     expect(promiseAllCalls[0].arguments.length).toBe(1);
     // Should be 2 file promises (one for each file)
     expect(promiseAllCalls[0].arguments[0].length).toBe(2);
+    // Check that the array actually contains promises
+    expect(promiseAllCalls[0].arguments[0][0] instanceof MockPromise).toBe(
+      true
+    );
+    expect(promiseAllCalls[0].arguments[0][1] instanceof MockPromise).toBe(
+      true
+    );
   });
+  //     );
+
+  // });
 });
