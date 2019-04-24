@@ -2,7 +2,11 @@ import { mockPromiseAll } from './helpers/mock-promise-all';
 jest.spyOn(Promise, 'all').mockImplementation(mockPromiseAll);
 import { MockPromise } from './helpers/mock-promise';
 
-import { createActionSet, createFileUploadAction } from '../src';
+import {
+  createActionSet,
+  createFileUploadAction,
+  FileUploadOptions,
+} from '../src';
 import * as request from '../src/upload-file-to-s3';
 
 describe('createFileUploadAction', () => {
@@ -64,7 +68,35 @@ describe('createFileUploadAction', () => {
       true
     );
   });
-  //     );
 
-  // });
+  it('should rethrow if the shouldRethrow option returns true', () => {
+    jest
+      .spyOn(request, 'uploadFileToS3')
+      .mockImplementation(
+        (file: File) =>
+          new MockPromise({ arguments: [file], thenCalls: [], catchCalls: [] })
+      );
+
+    const mutableOptions: FileUploadOptions = {};
+
+    const actionCreator = createFileUploadAction(ACTION_SET, mutableOptions);
+    const action = actionCreator([]);
+    action(jest.fn());
+
+    const { calls: promiseAllCalls } = mockPromiseAll;
+    const { thenCalls, catchCalls } = promiseAllCalls[0];
+
+    expect(thenCalls.length).toBe(0);
+    expect(catchCalls.length).toBe(1);
+
+    const [onlyCatchCall] = catchCalls;
+
+    expect(onlyCatchCall.arguments.length).toBe(1);
+
+    const [callback] = onlyCatchCall.arguments;
+
+    expect(() => callback('an error')).not.toThrow();
+    mutableOptions.shouldRethrow = () => true;
+    expect(() => callback('an error')).toThrow('an error');
+  });
 });
