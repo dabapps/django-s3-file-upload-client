@@ -17,7 +17,7 @@ const mockPromiseAllObject: MockPromiseAllObject = {
 };
 
 const mockPromiseAll = Object.assign(
-  mockPromiseAllFunction,
+  mockPromiseAllFunction as MockPromiseAllFunction,
   mockPromiseAllObject
 );
 

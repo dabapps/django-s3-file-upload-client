@@ -81,7 +81,7 @@ mockAxiosObject = {
 };
 
 const mockAxios: MockAxios = Object.assign(
-  createMockAxiosFunction('calls'),
+  createMockAxiosFunction('calls') as MockAxiosFunction,
   mockAxiosObject
 );
 function createMockAxiosFunction(key: keyof MockAxiosCalls) {
