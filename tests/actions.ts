@@ -1,3 +1,6 @@
+import { mockPromiseAll } from './helpers/mock-promise-all';
+jest.spyOn(Promise, 'all').mockImplementation(mockPromiseAll);
+
 import { createActionSet, createFileUploadAction } from '../src';
 
 describe('createFileUploadAction', () => {

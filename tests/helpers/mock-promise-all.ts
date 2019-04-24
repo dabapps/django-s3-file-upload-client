@@ -1,8 +1,8 @@
 import { MockPromise, MockPromiseCall } from './mock-promise';
 
 export type MockPromiseAllFunction = (
-  promises: ReadonlyArray<Promise<any>>
-) => Promise<ReadonlyArray<any>>;
+  promises: {} | ReadonlyArray<Promise<any>>
+) => Promise<any[]>;
 
 export interface MockPromiseAllObject {
   calls: ReadonlyArray<MockPromiseCall>;
