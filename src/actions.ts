@@ -33,14 +33,14 @@ export const createFileUploadAction = <S>(
 ) => (files: ReadonlyArray<File>) => (
   dispatch: ThunkDispatch<S, unknown, AnyAction>
 ) => {
-  const promises = files.map(file =>
-    uploadFileWithLoading(actionSet, file, dispatch)
-  );
-
   dispatch<BeginAction>({
     type: actionSet.BEGIN,
     payload: files.length,
   });
+
+  const promises = files.map(file =>
+    uploadFileWithLoading(actionSet, file, dispatch)
+  );
 
   return Promise.all(promises).catch(error => {
     if (options && options.shouldRethrow && options.shouldRethrow(error)) {
