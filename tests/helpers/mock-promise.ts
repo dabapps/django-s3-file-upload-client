@@ -9,7 +9,7 @@ export interface MockPromiseCall {
 }
 
 export class MockPromise extends Promise<any> {
-  private call: MockPromiseCall;
+  public call: MockPromiseCall;
 
   public constructor(call: MockPromiseCall) {
     super(resolve => {
