@@ -1,7 +1,8 @@
 import { mockAxios } from './helpers/mock-axios';
 jest.mock('axios', () => ({ default: mockAxios }));
 
-import * as requests from '../src/index';
+import { uploadFileToS3 } from '../src';
+import * as requests from '../src/upload-file-to-s3';
 import { mockedFile, mockedUploadData } from './helpers/stubs';
 
 describe('Django S3 File Upload', () => {
@@ -13,7 +14,7 @@ describe('Django S3 File Upload', () => {
     it('should call getUploadForm with the provided file', () => {
       jest.spyOn(requests, 'getUploadForm');
 
-      requests.uploadFileToS3(mockedFile);
+      uploadFileToS3(mockedFile);
 
       expect(requests.getUploadForm).toHaveBeenCalledTimes(1);
       expect(requests.getUploadForm).toHaveBeenCalledWith(mockedFile);

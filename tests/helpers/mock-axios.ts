@@ -1,24 +1,16 @@
-export interface MockAxiosChainCall {
-  arguments: any[];
-}
+import { MockPromise, MockPromiseCall } from './mock-promise';
 
-export interface MockAxiosCall {
-  arguments: any[];
-  thenCalls: MockAxiosChainCall[];
-  catchCalls: MockAxiosChainCall[];
-}
-
-type MockAxiosFunction = (...args: any[]) => MockAxiosPromise;
+type MockAxiosFunction = (...args: any[]) => MockPromise;
 
 interface MockAxiosCalls {
-  calls: MockAxiosCall[];
-  requestCalls: MockAxiosCall[];
-  getCalls: MockAxiosCall[];
-  deleteCalls: MockAxiosCall[];
-  headCalls: MockAxiosCall[];
-  postCalls: MockAxiosCall[];
-  putCalls: MockAxiosCall[];
-  patchCalls: MockAxiosCall[];
+  calls: MockPromiseCall[];
+  requestCalls: MockPromiseCall[];
+  getCalls: MockPromiseCall[];
+  deleteCalls: MockPromiseCall[];
+  headCalls: MockPromiseCall[];
+  postCalls: MockPromiseCall[];
+  putCalls: MockPromiseCall[];
+  patchCalls: MockPromiseCall[];
 }
 
 interface MockAxiosMethods {
@@ -50,36 +42,6 @@ interface MockAxiosObject extends MockAxiosCalls, MockAxiosMethods {
 export type MockAxios = MockAxiosFunction & MockAxiosObject;
 
 const MATCHES_CALLS = /calls$/i;
-
-class MockAxiosPromise extends Promise<any> {
-  private call: MockAxiosCall;
-
-  public constructor(call: MockAxiosCall) {
-    super(resolve => {
-      return resolve();
-    });
-
-    this.call = call;
-  }
-
-  public then(...args: any[]) {
-    const call: MockAxiosChainCall = {
-      arguments: args,
-    };
-
-    this.call.thenCalls.push(call);
-    return new MockAxiosPromise(this.call);
-  }
-
-  public catch(...args: any[]) {
-    const call: MockAxiosChainCall = {
-      arguments: args,
-    };
-
-    this.call.catchCalls.push(call);
-    return new MockAxiosPromise(this.call);
-  }
-}
 
 // tslint:disable-next-line:max-classes-per-file
 export class MockCancelledError extends Error {}
@@ -119,19 +81,19 @@ mockAxiosObject = {
 };
 
 const mockAxios: MockAxios = Object.assign(
-  createMockAxiosFunction('calls'),
+  createMockAxiosFunction('calls') as MockAxiosFunction,
   mockAxiosObject
 );
 function createMockAxiosFunction(key: keyof MockAxiosCalls) {
   return function mockAxiosFunction(...args: any[]) {
-    const call: MockAxiosCall = {
+    const call: MockPromiseCall = {
       arguments: args,
       thenCalls: [],
       catchCalls: [],
     };
 
     mockAxios[key].push(call);
-    return new MockAxiosPromise(call);
+    return new MockPromise(call);
   };
 }
 

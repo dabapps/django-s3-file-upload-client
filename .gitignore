@@ -2,7 +2,7 @@
 /coverage/*
 /build/*
 /dist/*
-.vscode/*
+/.vscode/*
 
 .DS_Store
 npm-debug.log*
