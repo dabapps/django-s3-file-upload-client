@@ -8,11 +8,11 @@ import {
   FileUploadOptions,
 } from '../src';
 import { uploadFileWithLoading } from '../src/actions';
-import * as request from '../src/upload-file-to-s3';
+import * as requests from '../src/upload-file-to-s3';
 
 describe('upload actions', () => {
   const mockUploadFileToS3 = jest
-    .spyOn(request, 'uploadFileToS3')
+    .spyOn(requests, 'uploadFileToS3')
     .mockImplementation(
       (file: File) =>
         new MockPromise({ arguments: [file], thenCalls: [], catchCalls: [] })
@@ -111,8 +111,8 @@ describe('upload actions', () => {
         jest.fn()
       ) as MockPromise;
 
-      expect(request.uploadFileToS3).toHaveBeenCalledTimes(1);
-      expect(request.uploadFileToS3).toHaveBeenCalledWith(mockFile);
+      expect(requests.uploadFileToS3).toHaveBeenCalledTimes(1);
+      expect(requests.uploadFileToS3).toHaveBeenCalledWith(mockFile);
       expect(result instanceof MockPromise).toBe(true);
     });
 
