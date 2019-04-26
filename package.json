@@ -1,6 +1,6 @@
 {
   "name": "@dabapps/django-s3-file-upload",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Upload files from the browser to S3 - client side implementation",
   "main": "dist/index.js",
   "directories": {},
@@ -52,7 +52,7 @@
     "ts-jest": "^24.0.0",
     "tslint": "^5.11.0",
     "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.5",
-    "typescript": "^3.4.3"
+    "typescript": "^3.3.4000"
   },
   "peerDependencies": {}
 }
