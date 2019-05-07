@@ -59,6 +59,9 @@ export const getUploadForm = (file: File): Promise<UploadData> => {
       headers: {
         'X-CSRFToken': Cookies.get('csrftoken'),
       },
+      data: {
+        filename: file.name,
+      },
     })
     .then((uploadResponse: AxiosResponse<UploadData>) => {
       return uploadFileToSignedUrl(uploadResponse.data, file);
