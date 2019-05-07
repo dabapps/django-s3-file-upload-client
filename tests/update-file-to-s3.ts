@@ -31,6 +31,19 @@ describe('Django S3 File Upload', () => {
       // Check that it was called
       expect(requestCalls.length).toBe(1);
 
+      expect(requestCalls[0].arguments).toEqual([
+        {
+          method: 'POST',
+          url: '/api/s3-file-uploads/',
+          headers: {
+            'X-CSRFToken': undefined,
+          },
+          data: {
+            filename: 'llama',
+          },
+        },
+      ]);
+
       // Get the .then calls
       const { thenCalls } = requestCalls[0];
 
