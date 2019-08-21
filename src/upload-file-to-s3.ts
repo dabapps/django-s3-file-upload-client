@@ -55,18 +55,14 @@ const isFile = (file: File | FileAndACL): file is File =>
   file && !('acl' in file);
 
 export const getUploadForm = (file: File | FileAndACL): Promise<UploadData> => {
-  let data;
-
-  if (isFile(file)) {
-    data = {
-      filename: file.name,
-    };
-  } else {
-    data = {
-      acl: file.acl,
-      filename: file.file.name,
-    };
-  }
+  const data = isFile(file)
+    ? {
+        filename: file.name,
+      }
+    : {
+        acl: file.acl,
+        filename: file.file.name,
+      };
 
   return axios
     .request({
