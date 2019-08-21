@@ -3,7 +3,11 @@ jest.mock('axios', () => ({ default: mockAxios }));
 
 import { uploadFileToS3 } from '../src';
 import * as requests from '../src/upload-file-to-s3';
-import { mockedFile, mockedUploadData } from './helpers/stubs';
+import {
+  mockedFile,
+  mockedFileAndACL,
+  mockedUploadData,
+} from './helpers/stubs';
 
 describe('Django S3 File Upload', () => {
   beforeEach(() => {
@@ -59,6 +63,48 @@ describe('Django S3 File Upload', () => {
         mockedUploadData,
         mockedFile
       );
+
+      spyOnUploadFileToSignedUrl.mockRestore();
+    });
+    it('should make an axios request and then call uploadFileToSignedUrl with ACL data included', () => {
+      requests.getUploadForm(mockedFileAndACL);
+      // Get the request calls
+      const { requestCalls } = mockAxios;
+
+      // Check that it was called
+      expect(requestCalls.length).toBe(1);
+
+      expect(requestCalls[0].arguments).toEqual([
+        {
+          method: 'POST',
+          url: '/api/s3-file-uploads/',
+          headers: {
+            'X-CSRFToken': undefined,
+          },
+          data: {
+            filename: 'drama',
+            acl: 'public-read',
+          },
+        },
+      ]);
+
+      // Get the .then calls
+      const { thenCalls } = requestCalls[0];
+
+      const spyOnUploadFileToSignedUrl = jest.spyOn(
+        requests,
+        'uploadFileToSignedUrl'
+      );
+
+      // Manually trigger .then
+      thenCalls[0].arguments[0]({ data: mockedUploadData });
+      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledTimes(1);
+      expect(spyOnUploadFileToSignedUrl).toHaveBeenCalledWith(
+        mockedUploadData,
+        mockedFileAndACL.file
+      );
+
+      spyOnUploadFileToSignedUrl.mockRestore();
     });
   });
 
