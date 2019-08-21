@@ -50,6 +50,11 @@ export interface UploadState {
   error: undefined | ReadonlyArray<unknown>;
 }
 
+export interface FileAndACL {
+  file: File;
+  acl: 'private' | 'public-read' | 'public-read-write' | 'authenticated-read';
+}
+
 export interface BeginAction extends Action {
   payload: number;
 }
