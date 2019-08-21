@@ -4,6 +4,7 @@ import {
   ActionSet,
   BeginAction,
   FailureAction,
+  FileAndACL,
   FileUploadOptions,
   SuccessAction,
 } from './types';
@@ -11,7 +12,7 @@ import { uploadFileToS3 } from './upload-file-to-s3';
 
 export const uploadFileWithLoading = <S>(
   actionSet: ActionSet,
-  file: File,
+  file: File | FileAndACL,
   dispatch: ThunkDispatch<S, unknown, AnyAction>
 ) => {
   dispatch({ type: actionSet.REQUEST });
@@ -30,7 +31,7 @@ export const uploadFileWithLoading = <S>(
 export const createFileUploadAction = <S>(
   actionSet: ActionSet,
   options?: FileUploadOptions
-) => (files: ReadonlyArray<File>) => (
+) => (files: ReadonlyArray<File | FileAndACL>) => (
   dispatch: ThunkDispatch<S, unknown, AnyAction>
 ) => {
   dispatch<BeginAction>({
