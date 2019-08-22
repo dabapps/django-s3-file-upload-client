@@ -1,4 +1,4 @@
-# Django S3 File Upload Server
+# Django S3 File Upload Client
 
 [![Build Status](https://travis-ci.com/dabapps/django-s3-file-upload-client.svg?token=k7ApnEQbpXLoWVm5Bc9o&branch=master)](https://travis-ci.com/dabapps/django-s3-file-upload-client)
 
