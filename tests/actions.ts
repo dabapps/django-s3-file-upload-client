@@ -5,6 +5,7 @@ import { MockPromise } from './helpers/mock-promise';
 import {
   createActionSet,
   createFileUploadAction,
+  FileAndACL,
   FileUploadOptions,
 } from '../src';
 import { uploadFileWithLoading } from '../src/actions';
@@ -14,7 +15,7 @@ describe('upload actions', () => {
   const mockUploadFileToS3 = jest
     .spyOn(requests, 'uploadFileToS3')
     .mockImplementation(
-      (file: File) =>
+      (file: File | FileAndACL) =>
         new MockPromise({ arguments: [file], thenCalls: [], catchCalls: [] })
     );
 

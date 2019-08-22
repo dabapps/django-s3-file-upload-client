@@ -1,4 +1,5 @@
 import { UploadData, UploadForm, UploadFormFields } from '../../src/types';
+import { FileAndACL } from '../../src/types';
 
 export const mockedUploadFormFields: UploadFormFields = {
   AWSAccessKeyId: 'aaaaaa',
@@ -25,3 +26,8 @@ export const mockedUploadData: UploadData = {
 };
 
 export const mockedFile = new File([], 'llama');
+
+export const mockedFileAndACL: FileAndACL = {
+  file: new File([], 'drama'),
+  acl: 'public-read',
+};

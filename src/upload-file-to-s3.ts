@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import * as Cookies from 'js-cookie';
 import { POST } from './constants';
-import { UploadData, UploadFormFieldsAndFile } from './types';
+import { FileAndACL, UploadData, UploadFormFieldsAndFile } from './types';
 
 export const configureFormData = (data: UploadFormFieldsAndFile) => {
   const formData = new FormData();
@@ -51,7 +51,19 @@ export const uploadFileToSignedUrl = (
     });
 };
 
-export const getUploadForm = (file: File): Promise<UploadData> => {
+const isFile = (file: File | FileAndACL): file is File =>
+  file && !('acl' in file);
+
+export const getUploadForm = (file: File | FileAndACL): Promise<UploadData> => {
+  const data = isFile(file)
+    ? {
+        filename: file.name,
+      }
+    : {
+        acl: file.acl,
+        filename: file.file.name,
+      };
+
   return axios
     .request({
       method: POST,
@@ -59,15 +71,18 @@ export const getUploadForm = (file: File): Promise<UploadData> => {
       headers: {
         'X-CSRFToken': Cookies.get('csrftoken'),
       },
-      data: {
-        filename: file.name,
-      },
+      data,
     })
     .then((uploadResponse: AxiosResponse<UploadData>) => {
-      return uploadFileToSignedUrl(uploadResponse.data, file);
+      return uploadFileToSignedUrl(
+        uploadResponse.data,
+        isFile(file) ? file : file.file
+      );
     });
 };
 
-export const uploadFileToS3 = (file: File): Promise<UploadData> => {
+export const uploadFileToS3 = (
+  file: File | FileAndACL
+): Promise<UploadData> => {
   return getUploadForm(file);
 };
