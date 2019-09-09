@@ -1,6 +1,6 @@
 {
   "name": "@dabapps/django-s3-file-upload",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Upload files from the browser to S3 - client side implementation",
   "main": "dist/index.js",
   "directories": {},
@@ -14,7 +14,7 @@
     "prettier-check": "prettier --check '**/*.{ts,tsx,js,jsx}'",
     "prettier": "prettier --write '**/*.{ts,tsx,js,jsx}'",
     "tests": "jest",
-    "test": "npm run lint && npm run typecheck && npm run tests -- --runInBand --coverage",
+    "test": "npm run dist && npm run lint && npm run typecheck && npm run tests -- --runInBand --coverage",
     "prepublishOnly": "npm run dist"
   },
   "repository": {
