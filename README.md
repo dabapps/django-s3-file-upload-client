@@ -14,6 +14,10 @@ To install the package run:
 npm i @dabapps/django-s3-file-upload -S
 ```
 
+### Compatibility
+
+You will also need polyfills for both `Promises` and `Symbols` if you wish to target older browsers.
+
 ## Usage
 
 ### How it works
