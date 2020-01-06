@@ -40,19 +40,19 @@
     "@dabapps/redux-create-reducer": "^1.0.3",
     "@types/redux-thunk": "^2.1.0",
     "axios": "^0.18.1",
-    "js-cookie": "^2.2.0",
-    "redux": "*",
+    "js-cookie": "^2.2.1",
+    "redux": "^4.0.5",
     "redux-thunk": "*"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.9",
-    "@types/js-cookie": "^2.2.2",
-    "jest": "^24.3.1",
-    "prettier": "^1.17.0",
-    "ts-jest": "^24.0.0",
-    "tslint": "^5.11.0",
-    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.5.5",
-    "typescript": "^3.3.4000"
+    "@types/jest": "^24.0.25",
+    "@types/js-cookie": "^2.2.4",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.6.2",
+    "typescript": "^3.7.4"
   },
   "peerDependencies": {}
 }
