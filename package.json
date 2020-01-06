@@ -41,7 +41,7 @@
     "@types/redux-thunk": "^2.1.0",
     "axios": "^0.18.1",
     "js-cookie": "^2.2.1",
-    "redux": "^4.0.5",
+    "redux": "*",
     "redux-thunk": "*"
   },
   "devDependencies": {
