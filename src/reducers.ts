@@ -1,5 +1,6 @@
 import { createReducer } from '@dabapps/redux-create-reducer';
 import { AnyAction } from 'redux';
+
 import { INITIAL_REDUCER_STATE } from './constants';
 import {
   ActionSet,
