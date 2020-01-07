@@ -1,9 +1,8 @@
 import { mockAxios } from './helpers/mock-axios';
 jest.mock('axios', () => ({ default: mockAxios }));
-/* tslint:disable */
-// keep the order Error: mock axios not defined
+
+// tslint:disable-next-line:ordered-imports
 import { uploadFileToS3 } from '../src';
-/* tslint:enable */
 import * as requests from '../src/upload-file-to-s3';
 import {
   mockedFile,
