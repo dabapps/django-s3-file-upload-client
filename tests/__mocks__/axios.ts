@@ -1,4 +1,4 @@
-import { MockPromise, MockPromiseCall } from './mock-promise';
+import { MockPromise, MockPromiseCall } from '../helpers/mock-promise';
 
 type MockAxiosFunction = (...args: any[]) => MockPromise;
 
@@ -46,9 +46,7 @@ const MATCHES_CALLS = /calls$/i;
 // tslint:disable-next-line:max-classes-per-file
 export class MockCancelledError extends Error {}
 
-let mockAxiosObject: MockAxiosObject;
-
-mockAxiosObject = {
+const mockAxiosObject: MockAxiosObject = {
   isCancel: (value: any) => value instanceof MockCancelledError,
   defaults: {},
   interceptors: {
@@ -116,4 +114,4 @@ export function createMockCancelledError(value: string | Error) {
   return new MockCancelledError(value instanceof Error ? value.message : value);
 }
 
-export { mockAxios };
+export default mockAxios;
