@@ -51,7 +51,7 @@
     "prettier": "^1.19.1",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
-    "tslint-config-dabapps": "github:dabapps/tslint-config-dabapps#v0.6.2",
+    "tslint-config-dabapps": "^0.6.2",
     "typescript": "^3.3.4000"
   }
 }
