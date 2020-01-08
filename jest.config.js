@@ -1,6 +1,5 @@
-const helpersPattern = '<rootDir>/tests/helpers/*';
-
 module.exports = {
+  collectCoverageFrom: ['<rootDir>/src/'],
   coverageThreshold: {
     global: {
       branches: 100,
@@ -14,6 +13,9 @@ module.exports = {
   },
   testRegex: '(/tests/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  testPathIgnorePatterns: [helpersPattern],
-  coveragePathIgnorePatterns: [helpersPattern],
+  testPathIgnorePatterns: [
+    '<rootDir>/tests/helpers/',
+    '<rootDir>/tests/__mocks__/',
+  ],
+  roots: ['<rootDir>', '<rootDir>/tests/'],
 };

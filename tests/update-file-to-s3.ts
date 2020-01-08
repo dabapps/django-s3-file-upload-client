@@ -1,13 +1,13 @@
-import { mockAxios } from './helpers/mock-axios';
-jest.mock('axios', () => ({ default: mockAxios }));
-
 import { uploadFileToS3 } from '../src';
 import * as requests from '../src/upload-file-to-s3';
+import mockAxios from './__mocks__/axios';
 import {
   mockedFile,
   mockedFileAndACL,
   mockedUploadData,
 } from './helpers/stubs';
+
+jest.mock('axios');
 
 describe('Django S3 File Upload', () => {
   beforeEach(() => {

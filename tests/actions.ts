@@ -1,7 +1,3 @@
-import { mockPromiseAll } from './helpers/mock-promise-all';
-jest.spyOn(Promise, 'all').mockImplementation(mockPromiseAll);
-import { MockPromise } from './helpers/mock-promise';
-
 import {
   createActionSet,
   createFileUploadAction,
@@ -10,6 +6,10 @@ import {
 } from '../src';
 import { uploadFileWithLoading } from '../src/actions';
 import * as requests from '../src/upload-file-to-s3';
+import { MockPromise } from './helpers/mock-promise';
+import { mockPromiseAll } from './helpers/mock-promise-all';
+
+jest.spyOn(Promise, 'all').mockImplementation(mockPromiseAll);
 
 describe('upload actions', () => {
   const mockUploadFileToS3 = jest
