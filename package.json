@@ -39,7 +39,7 @@
   "dependencies": {
     "@dabapps/redux-create-reducer": "^1.0.3",
     "@types/redux-thunk": "^2.1.0",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "js-cookie": "^2.2.1",
     "redux": "*",
     "redux-thunk": "*"
